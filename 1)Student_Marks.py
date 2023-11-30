@@ -1,14 +1,14 @@
 fds = []
-num = int(input("enter number of students"))
+num = int(input("Enter number of students :"))
 for i in range(num):
-    x = int(input("enter marks of students"+str(i+1)+":"))
+    x = int(input("Enter marks of students"+str(i+1)+":"))
     if x==-1:
-        print("student is absent")
+        print("Student is absent")
         fds.append(x)
     elif(x>=0 and x<=30):
         fds.append(x)
     else:
-        print("invalid input")
+        print("invalid input !")
 def avg(fds):
     sum = 0
     count = 0
@@ -17,14 +17,14 @@ def avg(fds):
             sum+=fds[i]
             count+=1
     avg = sum/count
-    print("the saverage of marks of students is:",avg)
+    print("The Average of marks of students is : ",avg)
 def absent(fds):
     count = 0
     for i in range(num):
             if(fds[i]==-1):
                 count+=1
                
-    print("number of absent student is:",count)
+    print("Number of absent student is :",count)
 def marks_with_highest_frequency(fds):
     freq = 0
     for i in range(len(fds)):
@@ -36,8 +36,8 @@ def marks_with_highest_frequency(fds):
         if(freq<count):
             marks = fds[i]
             freq = count
-    print("highest frequent marks",marks)
-    print("frequency of marks",freq)
+    print("\Highest frequent marks",marks)
+    print("Frequency of marks",freq)
 def min_max(fds):
 	min = 31
 	max =-1
@@ -47,16 +47,16 @@ def min_max(fds):
 				min=fds[i]
 			if(max <fds[i]):
 				max = fds[i]
-	print("minimum marks is",min)
-	print("maximum marks is",max)
+	print("Minimum marks is",min)
+	print("Maximum marks is",max)
 while True:  
-    print("enter your choice")
-    print("choice 1:calculate average")
-    print("choice 2:calculate frequency")
-    print("choice 3:calculate max marks and min marks ")
-    print("choice 4:calculate absent")
-    print("choice 5: exit")
-    choice = int(input("enter your choice digit"))
+    print("Enter your choice")
+    print("choice 1:Calculate average")
+    print("choice 2:Calculate frequency")
+    print("choice 3:Calculate max marks and min marks ")
+    print("choice 4:Calculate absent")
+    print("choice 5: Exit")
+    choice = int(input("Enter your choice digit"))
     if choice == 1:
 	    avg(fds)
     elif choice == 2:
@@ -67,10 +67,10 @@ while True:
     elif choice == 4:
 	    absent(fds)
     elif choice ==5:
-	    print("thankyou for using")
+	    print("Thankyou for using code created by Avishkar!")
 	    break
     else:	
-	    print("enter valid choice")
+	    print("Plz Enter valid choice")
 	
 
     
