@@ -8,7 +8,7 @@ for i in range(num):
     elif(x>=0 and x<=30):
         fds.append(x)
     else:
-        print("invalid input !")
+        print("Invalid input !")
 def avg(fds):
     sum = 0
     count = 0
