@@ -6,7 +6,7 @@ def bubble(arr,n):
 				temp = arr[j]
 				arr[j] = arr[j+1]
 				arr[j+1] = temp
-	print(arr)
+	
 
 # insertion sort
 def insert(arr,n):
@@ -17,7 +17,7 @@ def insert(arr,n):
 			arr[j+1] = arr[j]
 			j = j-1
 		arr[j+1] = temp
-	print(arr)
+	
 
 
 #selection sort
@@ -31,7 +31,7 @@ def select(arr,n):
 		arr[i] = arr[mid]
 		arr[mid] = temp
 				
-	print(arr)
+	
 # quick sort
 def partition(arr,low,high):
 	pivot = arr[high]
