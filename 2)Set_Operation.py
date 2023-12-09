@@ -1,98 +1,222 @@
-def accept_set(A,Str):
-   n = int(input("Enter the total no. of student who play %s : "%Str))
-   for i in range(n) :
-      x = input("Enter the name of student %d who play %s : "%((i+1),Str))
-      A.append(x)
-   print("Set accepted successfully");
-def display_set(A,Str):
-   n = len(A)
-   if(n == 0) :
-      print("\nGroup of Students who play %s = { }",Str)
-   else :
-      print("\nGroup of Students who play %s = { }",Str)
-      for i in range(n-1) :
-         print("%s,"%A[i])
-      print("%s }"%A[n-1]);
-def search_set(A,X) :
-    n = len(A)
-    for i in range(n):
-       if(A[i] == X) :
-          return (1)
-    return (0)
-def find_intersection_set(A,B,C):
-   for i in range(len(A)):
-      flag = search_set(B,A[i]);
-      if(flag == 1) :
-          C.append(A[i])
-def find_difference_set(A,B,C):
-    for i in range(len(A)):
-      flag = search_set(B,A[i]);
-      if(flag == 0) :
-          C.append(A[i])
-def find_union_set(A,B,C):
-   for i in range(len(A)):
-      C.append(A[i])
-   for i in range(len(B)):
-      flag = search_set(A,B[i]);
-      if(flag == 0) :
-          C.append(B[i])
-def Main() :
-   Group_A = []
-   Group_B = []
-   Group_C = []
-   while True :
-       print ("\t1 : Accept the Information")
-       print ("\t2 : List of students who play both cricket and badminton")
-       print ("\t3 : List of students who play either cricket or badminton but not both")
-       print ("\t4 : Number of students who play neither cricket nor badminton")
-       print ("\t5 : Number of students who play cricket and football but not badminton")
-       print ("\t6 : Exit")
-       ch = int(input("Enter your choice : "))
-       Group_R = []
-      
-       if (ch==1):
-           accept_set(Group_A,"Cricket")
-           accept_set(Group_B,"Badminton")
-           accept_set(Group_C,"Football")
-           display_set(Group_A,"Cricket")
-           display_set(Group_B,"Badminton")
-           display_set(Group_C,"Football")
-       elif (ch==2):
-           display_set(Group_A,"Cricket")
-           display_set(Group_B,"Badminton")
-           find_intersection_set(Group_A,Group_B,Group_R)
-           display_set(Group_R," both Cricket and Badminton")
-       elif (ch==3):
-           display_set(Group_A,"Cricket")
-           display_set(Group_B,"Badminton")
-           R1 = []
-           find_union_set(Group_A,Group_B,R1)
-           R2 = []
-           find_intersection_set(Group_A,Group_B,R2)
-           find_difference_set(R1,R2,Group_R)
-           display_set(Group_R," either cricket or badminton but not both")
-       elif (ch==4):
-           display_set(Group_A,"Cricket")
-           display_set(Group_B,"Badminton")
-           display_set(Group_C,"Football")
-           R1 = []
-           find_union_set(Group_A,Group_B,R1)
-           find_difference_set(Group_C,R1,Group_R)
-           display_set(Group_R," neither cricket nor badminton")
-           print("Number of students who play neither cricket nor badminton = %s"%len(Group_R))
-       elif (ch==5):
-           display_set(Group_A,"Cricket")
-           display_set(Group_C,"Football")
-           display_set(Group_B,"Badminton")
-           R1 = []
-           find_intersection_set(Group_A,Group_C,R1)
-           find_difference_set(R1,Group_B,Group_R)
-           display_set(Group_R,"cricket and football but not badminton")
-           print("Number of students who play cricket and football but not badminton = %s"%len(Group_R))
-       elif (ch == 6):
-           print ("End of Program")
-           break
-       else :
-           print ("Wrong choice entered !! Try again") 	
-    
-    
+'''
+
+
+Experiment No. 1 : In a second year computer engineering class, group A students play cricket, group B students play
+                   badminton and group C students play football.
+                   Write a python program using functions to compute following:
+                   a) List of students who play both cricket and badminton.
+                   b) List of students who play either cricket or badminton but not both.
+                   c) Number of students who play neither cricket nor badminton.
+                   d) Number of students who play cricket and football but not badminton.
+(NOTE : While realising the group, duplicate entries should be avoided. Do not use SET built-in functions)
+'''
+
+
+# Function for removing duplicate entries from the group
+
+def removeDuplicate(d):
+    lst=[]
+    for i in d:
+        if i not in lst:
+            lst.append(i)
+    return lst
+
+#<---------------------------------------------------------------------------------------->
+
+# Function for finding intersection between two sets (A&B)
+
+def intersection(lst1,lst2):
+    lst3=[]
+    for val in lst1:
+        if val in lst2:
+            lst3.append(val)
+    return lst3
+
+#<------------------------------------------------------------------------------------------>
+
+# Function for finding union of two sets (A|B)
+
+def union(lst1,lst2):
+    lst3=lst1.copy()
+    for val in lst2:
+        if val not in lst3:
+            lst3.append(val)
+    return lst3
+
+#<------------------------------------------------------------------------------------------->
+
+# Function for finding difference between two sets (A-B)
+
+def diff(lst1,lst2):
+    lst3=[]
+    for val in lst1:
+        if val not in lst2:
+            lst3.append(val)
+    return lst3
+
+#<---------------------------------------------------------------------------------------------->
+
+# Function for finding symmetric difference of two sets (A^B)
+
+def sym_diff(lst1,lst2):
+    lst3=[]
+    D1=diff(lst1,lst2)
+    print("Difference between Cricket and Badminton (C-B) is : ", D1)
+    D2=diff(lst2,lst1)
+    print("Difference between Badminton and Cricket (B-C) is : ", D2)
+    lst3=union(D1,D2)
+    return lst3
+
+#<------------------------------------------------------------------------------------------------>
+
+# Functon for finding List of students who play both cricket and badminton
+
+def CB(lst1,lst2):
+    lst3=intersection(lst1,lst2)
+    print("\n\nList of students who play both cricket and badminton is : ", lst3)
+    return len(lst3)
+
+#<------------------------------------------------------------------------------------------------>
+
+# Function for finding List of students who play either cricket or badminton but not both
+
+def eCeB(lst1,lst2):
+    lst3=sym_diff(lst1,lst2)
+    print("\nList of students who play either cricket or badminton but not both is : ",lst3)
+    return len(lst3)
+
+#<-------------------------------------------------------------------------------------------------->
+
+# Function for finding Number of students who play neither cricket nor badminton
+
+def nCnB(lst1,lst2,lst3):
+    lst4=diff(lst1,union(lst2,lst3))
+    print("\n\nList of students who play neither cricket nor badminton is : ",lst4)
+    return len(lst4)
+
+#<--------------------------------------------------------------------------------------------------->
+
+# Function for finding Number of students who play cricket and football but not badminton
+
+def CBnF(lst1,lst2,lst3):
+    lst4=diff(intersection(lst1,lst2),lst3)
+    print("\n\nList of students who play cricket and football but not badminton is : ",lst4)
+    return len(lst4)
+
+#<----------------------------------------------------------------------------------------------------->
+
+# Main function
+
+# Creating an empty list for SE COMP
+SEComp = []
+n = int(input("\nEnter number of students in SE COMP: "))
+print("Enter the names of",n,"students (Please press ENTER after entering each students name) :")
+for i in range(0, n):
+    ele = input()
+    SEComp.append(ele)  # adding the element
+print("Original list of students in SEComp : " + str(SEComp))
+
+#<------------------------------------------------------------------------------------------------------->
+
+
+# Creating an empty list for Cricket
+Cricket = []
+n = int(input("\n\nEnter number of students who play cricket : "))
+print("Enter the names of",n,"students who play cricket (Please press ENTER after entering each students name) :")
+for i in range(0, n):
+    ele = input()
+    Cricket.append(ele)  # adding the element
+print("Original list of students playing cricket is :" +str(Cricket))
+Cricket=removeDuplicate(Cricket)
+print("The list of students playing cricket after removing duplicates : " +str(Cricket))
+
+#<------------------------------------------------------------------------------------------------------->
+
+
+# Creating an empty list for Football
+Football = []
+n = int(input("\n\nEnter number of students who play football : "))
+print("Enter the name of",n,"students who play football (Please press ENTER after entering each students name) :")
+for i in range(0, n):
+    ele = input()
+    Football.append(ele)  # adding the element
+print("Original list of students playing football :" +str(Football))
+Football=removeDuplicate(Football)
+print("The list of students playing football after removing duplicates : " +str(Football))
+
+#<-------------------------------------------------------------------------------------------------------->
+
+
+# Creating an empty list for Badminton
+Badminton = []
+n = int(input("\n\nEnter number of students who play badminton : "))
+print("Enter the name of",n,"students who play badminton (Please press ENTER after entering each students name) :")
+for i in range(0, n):
+    ele = input()
+    Badminton.append(ele)  # adding the element
+print("Original list of students playing badminton :" +str(Badminton))
+Badminton=removeDuplicate(Badminton)
+print("The list of students playing badminton after removing duplicates : " +str(Badminton))
+
+#<---------------------------------------------------------------------------------------------------------->
+
+flag=1
+while flag==1:
+    print("\n\n--------------------MENU--------------------\n")
+    print("1. List of students who play both cricket and badminton")
+    print("2. List of students who play either cricket or badminton but not both")
+    print("3. List of students who play neither cricket nor badminton")
+    print("4. Number of students who play cricket and football but not badminton")
+    print("5. Exit\n")
+    ch=int(input("Enter your Choice (from 1 to 5) :"))
+
+    if ch==1:
+        print("Number of students who play both cricket and badminton : ", CB(Cricket,Badminton))
+        a = input("\n\nDo you want to continue (yes/no) :")
+        if a == "yes":
+            flag = 1
+        else:
+            flag = 0
+            print("Thanks for using this program!")
+
+    elif ch==2:
+        print("Number of students who play either cricket or badminton but not both : ", eCeB(Cricket, Badminton))
+        a = input("\n\nDo you want to continue (yes/no) :")
+        if a == "yes":
+            flag = 1
+        else:
+            flag = 0
+            print("Thanks for using this program!")
+
+    elif ch==3:
+        print("Number of students who play neither cricket nor badminton : ", nCnB(SEComp,Cricket,Badminton))
+        a = input("\n\nDo you want to continue (yes/no) :")
+        if a == "yes":
+            flag = 1
+        else:
+            flag = 0
+            print("Thanks for using this program!")
+
+    elif ch==4:
+        print("Number of students who play cricket and football but not badminton : ", CBnF(Cricket,Football,Badminton))
+        a = input("\n\nDo you want to continue (yes/no) :")
+        if a == "yes":
+            flag = 1
+        else:
+            flag = 0
+            print("Thanks for using this program!")
+
+    elif ch==5:
+        flag=0
+        print("Thanks for using this program!")
+
+    else:
+        print("!!Wrong Choice!! ")
+        a=input("\n\nDo you want to continue (yes/no) :")
+        if a=="yes":
+            flag=1
+        else:
+            flag=0
+            print("Thanks for using this program!")
+
+#<---------------------------------------------END OF PROGRAM--------------------------------------->
