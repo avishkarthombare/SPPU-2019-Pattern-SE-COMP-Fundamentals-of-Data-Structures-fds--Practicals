@@ -25,7 +25,7 @@ def char_occur(str):
     print("the count of the substring" ,char,"in the string ",strin ,"is",count)
 def palindrome(str):
     strin = input("enter the string:")
-    b = o
+    b = 0
     e = len(str)-1
     while(True):
         if(strin[b]!=str[e]):
